@@ -1,9 +1,8 @@
 package com.hewei.longflowtest.flow;
 
 import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.hewei.longflowtest.R;
 import com.hewei.longflowtest.flow.viewmodel.AgeViewModel;
 
-public class Step2Activity extends AppCompatActivity {
+public class AgeActivity extends StepActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class Step2Activity extends AppCompatActivity {
         final TextView tvAge = findViewById(R.id.tvAge);
         final EditText etAge = findViewById(R.id.etAge);
 
-        final AgeViewModel viewModel = FlowPresenter.getInstance().getAgeViewModel();
+        final AgeViewModel viewModel = new AgeViewModel();
         viewModel.getAge().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
@@ -46,7 +45,8 @@ public class Step2Activity extends AppCompatActivity {
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FlowPresenter.getInstance().step(Step2Activity.this, 3);
+                FlowPresenter.getInstance().setAge(viewModel.getAge().getValue());
+                FlowPresenter.getInstance().step(AgeActivity.this, 3);
             }
         });
     }

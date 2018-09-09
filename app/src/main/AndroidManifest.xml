@@ -22,11 +22,12 @@
             android:name=".PrimeActivity"
             android:label="@string/app_name" />
         <activity android:name=".flow.NameActivity" />
-        <activity android:name=".flow.Step2Activity" />
+        <activity android:name=".flow.AgeActivity" />
         <activity
             android:name=".flow.FlowActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".flow.DetailsActivity"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleTop"/>
+        <activity android:name=".flow.DetailsActivity" />
     </application>
 
 </manifest>

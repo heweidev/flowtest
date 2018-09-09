@@ -1,22 +1,18 @@
 package com.hewei.longflowtest.flow;
 
 import android.arch.lifecycle.Observer;
-import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.hewei.longflowtest.Constants;
 import com.hewei.longflowtest.R;
-import com.hewei.longflowtest.common.LocalObject;
 import com.hewei.longflowtest.flow.viewmodel.NameViewModel;
 
-public class NameActivity extends AppCompatActivity {
+public class NameActivity extends StepActivity {
     private NameViewModel mViewModel;
 
     @Override
@@ -35,7 +31,7 @@ public class NameActivity extends AppCompatActivity {
         }
         */
 
-        mViewModel = FlowPresenter.getInstance().getNameViewModel();
+        mViewModel = new NameViewModel();
 
         final TextView textView = findViewById(R.id.name);
         mViewModel.getName().observe(this, new Observer<String>() {
@@ -61,6 +57,7 @@ public class NameActivity extends AppCompatActivity {
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FlowPresenter.getInstance().setName(mViewModel.getName().getValue());
                 FlowPresenter.getInstance().step(NameActivity.this, 2);
             }
         });
